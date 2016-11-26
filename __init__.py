@@ -83,25 +83,22 @@ class Lightbox(Directive):
             align = 'left'
 
         if alt is not None:
-            alt_text = '{} (click to view large image)'.format(alt)
+            alt_text = '{}'.format(alt)
         else:
-            alt_text = '(click to view large image)'
+            alt_text = ''
 
         if caption is not None:
-            caption_block = ('''<p class="align-{}">{} (click to view large '''
-                             '''image)</p>''').format(align, caption)
+            caption_block = ('''<p class="{}">{}</p>''').format(align, caption)
         else:
-            caption_block = ('''<p class="align-{}">(click to view large '''
-                             '''image)</p>''').format(align)
+            caption_block = ('''<p class="{}"></p>''').format(align)
 
-        block = ('''<div class="lightbox-block align-{4}">'''
+        block = ('''<div class="lightbox-block {4}">'''
                  '''<a href="#{0}" title="{3}">'''
-                 '''<img src="{1}" alt="{3}" class="align-{4}" /></a>'''
+                 '''<img src="{1}" alt="{3}" class="{4}" /></a>'''
                  '''<a href="#_" class="lightbox" id="{0}" title="Click to '''
                  '''close">'''
                  '''<img alt="Click to close" src="{2}" /></a>{5}</div>'''
-                 '''<div class="lightbox-divider">'''
-                 '''</div>''').format(uuid, thumb, large, alt_text, align,
+                  ).format(uuid, thumb, large, alt_text, align,
                                       caption_block)
         return [nodes.raw('', block, format='html'), ]
 
